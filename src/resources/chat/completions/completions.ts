@@ -44,7 +44,7 @@ export class Completions extends APIResource {
     body: ChatCompletionCreateParams,
     options?: Core.RequestOptions,
   ): APIPromise<ChatCompletion> | APIPromise<Stream<ChatCompletionChunk>> {
-    return this._client.post('/chat/completions', { body, ...options, stream: body.stream ?? false }) as
+    return this._client.post('', { body, ...options, stream: body.stream ?? false }) as
       | APIPromise<ChatCompletion>
       | APIPromise<Stream<ChatCompletionChunk>>;
   }
@@ -54,7 +54,7 @@ export class Completions extends APIResource {
    * the `store` parameter set to `true` will be returned.
    */
   retrieve(completionId: string, options?: Core.RequestOptions): Core.APIPromise<ChatCompletion> {
-    return this._client.get(`/chat/completions/${completionId}`, options);
+    return this._client.get(`/${completionId}`, options);
   }
 
   /**
@@ -67,7 +67,7 @@ export class Completions extends APIResource {
     body: ChatCompletionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ChatCompletion> {
-    return this._client.post(`/chat/completions/${completionId}`, { body, ...options });
+    return this._client.post(`/${completionId}`, { body, ...options });
   }
 
   /**
@@ -86,7 +86,7 @@ export class Completions extends APIResource {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/chat/completions', ChatCompletionsPage, { query, ...options });
+    return this._client.getAPIList('', ChatCompletionsPage, { query, ...options });
   }
 
   /**
@@ -94,7 +94,7 @@ export class Completions extends APIResource {
    * with the `store` parameter set to `true` can be deleted.
    */
   del(completionId: string, options?: Core.RequestOptions): Core.APIPromise<ChatCompletionDeleted> {
-    return this._client.delete(`/chat/completions/${completionId}`, options);
+    return this._client.delete(`/${completionId}`, options);
   }
 }
 
